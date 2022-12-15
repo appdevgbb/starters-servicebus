@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-publisher
+  namespace: event-driven-samples
+spec:
+  selector:
+    matchLabels:
+      app: simple-publisher
+  template:
+    metadata:
+      labels:
+        app: simple-publisher
+    spec:
+      serviceAccountName: event-driven-samples-mi-sa
+      containers:
+      - name: simple-publisher
+        image: eventdrivensamples.azurecr.io/simple-publisher:latest
+        resources:
+          limits:
+            memory: "512Mi"
+        env:
+        - name: SimplePublisher__Namespace
+          value: "[YOUR SERVICE BUS NAMESPACE HERE]"
+        - name: SimplePublisher__QueueName
+          value: "[YOUR PRE-CREATED QUEUE HERE]"
+        - name: SimplePublisher__SendBatchSize
+          value: "1"
+        - name: SimplePublisher__SendBatchDelayInMs
+          value: "1000"
+        - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+          value: "InstrumentationKey=[YOUR APP INSIGHTS KEY HERE]"
+        - name: Logging__Console__FormatterName
+          value: "simple"
+        - name: Logging__Console__FormatterOptions__IncludeScopes
+          value: "true"
+        - name: Logging__Console__FormatterOptions__TimestampFormat
+          value: "yyy-MM-dd HH:mm:ss.fff "
+        - name: Logging__Console__FormatterOptions__SingleLine
+          value: "true"

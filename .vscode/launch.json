@@ -1,0 +1,52 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "SimplePublisher",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build SimplePublisher",
+            "program": "${workspaceFolder}/SimplePublisher/bin/Debug/net7.0/SimplePublisher.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SimplePublisher",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "SimpleSubscriber",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build SimpleSubscriber",
+            "program": "${workspaceFolder}/SimpleSubscriber/bin/Debug/net7.0/SimpleSubscriber.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SimpleSubscriber",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/SimpleSubscriber/bin/Debug/net7.0/SimpleSubscriber.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SimpleSubscriber",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+        {
+            "name": "Docker .NET Core Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/SimpleSubscriber/SimpleSubscriber.csproj"
+            }
+        }
+    ]
+}
